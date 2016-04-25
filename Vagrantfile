@@ -20,13 +20,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.memory = "1024"
   end
 
-  config.vm.provision :shell, :path => "scripts/disable-windows-update.ps1"
   config.vm.provision :shell, :path => "scripts/install-chocolatey.ps1"
   config.vm.provision :shell, :inline =>
     "choco install sqlite sqlite.shell git strawberryperl --confirm"
   config.vm.provision :shell, :path => "scripts/install-iis-8.5.ps1"
   config.vm.provision :shell, :path => "scripts/install-perl-modules.ps1"
-  config.vm.provision :file, :source => 'scripts/bugzilla.responses',
-    :destination => '/tmp/initial.responses'
-  config.vm.provision :shell, :path => "scripts/install-iis-bugzilla.ps1"
 end
